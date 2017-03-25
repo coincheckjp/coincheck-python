@@ -68,10 +68,9 @@ class CoinCheck:
         data = ''
         self.request_headers = {}
         if (method == ServiceBase.METHOD_POST or method == ServiceBase.METHOD_DELETE):
-            data = json.dumps(params).encode('utf-8') 
+            data = json.dumps(params).encode('utf-8')
             self.request_headers = {
-                'content-type': "application/json; charset=utf-8",
-                'content-type': "application/x-www-form-urlencoded"
+                'content-type': "application/json"
             }
 
         self.setSignature(path, params)
