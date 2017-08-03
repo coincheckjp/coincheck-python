@@ -70,7 +70,7 @@ class CoinCheck:
         if (method == ServiceBase.METHOD_POST or method == ServiceBase.METHOD_DELETE):
             data = json.dumps(params).encode('utf-8')
             self.request_headers = {
-                'content-type': "application/json"
+                'content-type': 'application/json'
             }
 
         self.setSignature(path, params)
@@ -81,4 +81,4 @@ class CoinCheck:
         self.client.request(method, path, data, self.request_headers)
         res = self.client.getresponse()
         data = res.read()
-        return data.decode("utf-8")
+        return json.loads(data.decode('utf-8'))
