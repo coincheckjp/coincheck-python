@@ -4,6 +4,12 @@ coincheck
 The easiest Bitcoin Exchange in Japan
 https://coincheck.jp/
 
+## Install
+
+```
+pip install git+https://github.com/coincheckjp/coincheck-python
+```
+
 ## Usage
 
 ```python
