@@ -48,7 +48,7 @@ class CoinCheck:
     def setSignature(self, path, arr):
         nonce = str(round(time.time() * 1000))
         url = 'https://' + self.apiBase + path
-        message = nonce + url + json.dumps(arr)
+        message = nonce + url + (json.dumps(arr) if arr else '')
         signature = hmac.new(self.secretKey.encode('utf-8'), message.encode('utf-8'), hashlib.sha256).hexdigest()
         self.request_headers.update({
                 'ACCESS-NONCE': nonce,
