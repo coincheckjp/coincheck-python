@@ -48,7 +48,7 @@ class CoinCheck:
     def setSignature(self, path, arr):
         nonce = str(round(time.time() * 1000))
         url = 'https://' + self.apiBase + path
-        message = nonce + url + json.dumps(arr)
+        message = nonce + url + (json.dumps(arr) if arr else '')
         signature = hmac.new(self.secretKey.encode('utf-8'), message.encode('utf-8'), hashlib.sha256).hexdigest()
         self.request_headers.update({
                 'ACCESS-NONCE': nonce,
@@ -70,7 +70,7 @@ class CoinCheck:
         if (method == ServiceBase.METHOD_POST or method == ServiceBase.METHOD_DELETE):
             data = json.dumps(params).encode('utf-8')
             self.request_headers = {
-                'content-type': "application/json"
+                'content-type': 'application/json'
             }
 
         self.setSignature(path, params)
@@ -81,4 +81,4 @@ class CoinCheck:
         self.client.request(method, path, data, self.request_headers)
         res = self.client.getresponse()
         data = res.read()
-        return data.decode("utf-8")
+        return json.loads(data.decode('utf-8'))
