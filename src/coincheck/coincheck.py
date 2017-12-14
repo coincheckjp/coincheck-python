@@ -63,13 +63,13 @@ class CoinCheck:
     def request(self, method, path, params):
         if (method == ServiceBase.METHOD_GET and len(params) > 0):
             path = path + '?' + urllib.parse.urlencode(params)
-
         data = ''
         self.request_headers = {}
         if (method == ServiceBase.METHOD_POST or method == ServiceBase.METHOD_DELETE):
             self.request_headers = {
                 'content-type': "application/json"
             }
+            path = path + '?' + urllib.parse.urlencode(params)
         self.setSignature(path)
 
         self.client = http.client.HTTPSConnection(self.apiBase)
