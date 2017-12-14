@@ -26,6 +26,8 @@ res = coinCheck.ticker.all()
 # res = coinCheck.order.cancel(params);
 # res = coinCheck.order.transactions(params);
 
+# res = coinCheck.leverage.positions();
+# params = {'status': 'open'}
 # res = coinCheck.leverage.positions(params);
 
 # res = coinCheck.account.balance(params);
