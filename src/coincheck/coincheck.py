@@ -29,7 +29,7 @@ class CoinCheck:
     def __getattr__(self, attr):
         attrs = ['ticker', 'trade', 'order_book', 'order', 'leverage', 'account'
                 , 'send', 'deposit', 'bank_account', 'withdraw', 'borrow', 'transfer']
-        
+
         if attr in attrs:
             #dynamic import module
             moduleName = attr.replace('_', '')
@@ -45,10 +45,10 @@ class CoinCheck:
         else:
             raise AttributeError('Unknown accessor ' + attr)
 
-    def setSignature(self, path, arr):
-        nonce = str(round(time.time() * 1000))
+    def setSignature(self, path):
+        nonce = str(round(time.time() * 1000000))
         url = 'https://' + self.apiBase + path
-        message = nonce + url + json.dumps(arr)
+        message = nonce + url
         signature = hmac.new(self.secretKey.encode('utf-8'), message.encode('utf-8'), hashlib.sha256).hexdigest()
         self.request_headers.update({
                 'ACCESS-NONCE': nonce,
@@ -63,17 +63,14 @@ class CoinCheck:
     def request(self, method, path, params):
         if (method == ServiceBase.METHOD_GET and len(params) > 0):
             path = path + '?' + urllib.parse.urlencode(params)
-            params = {};
 
         data = ''
         self.request_headers = {}
         if (method == ServiceBase.METHOD_POST or method == ServiceBase.METHOD_DELETE):
-            data = json.dumps(params).encode('utf-8')
             self.request_headers = {
                 'content-type': "application/json"
             }
-
-        self.setSignature(path, params)
+        self.setSignature(path)
 
         self.client = http.client.HTTPSConnection(self.apiBase)
         if (self.DEBUG):
