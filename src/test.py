@@ -29,7 +29,8 @@ res = coinCheck.ticker.all()
 # res = coinCheck.leverage.positions();
 # params = {'status': 'open'}
 # res = coinCheck.leverage.positions(params);
-
+# params = { 'limit' : 10, 'order': 'desc'}
+# res = coinCheck.order.transactions_pagination(params);
 # res = coinCheck.account.balance(params);
 # res = coinCheck.account.leverage_balance(params);
 # res = coinCheck.account.info(params);
