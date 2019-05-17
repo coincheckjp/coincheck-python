@@ -2,7 +2,7 @@
 
 from setuptools import setup
 
-setup(name='coincheck-module',
+setup(name='coincheck',
       version='1.1.0',
       description='Coincheck API client.',
       url='https://github.com/QuoineFinancial/coincheck-python',
